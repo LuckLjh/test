@@ -1,0 +1,9 @@
+
+<div ng-controller="KisBpmMultiInstanceCallCtrl">
+	<select ng-model="property.valueHidden"
+		ng-change="multiInstanceChanged()"
+		ng-options="values.name for values in property.valueHidden"
+		on-repeat-finished-render>
+
+	</select>
+</div>

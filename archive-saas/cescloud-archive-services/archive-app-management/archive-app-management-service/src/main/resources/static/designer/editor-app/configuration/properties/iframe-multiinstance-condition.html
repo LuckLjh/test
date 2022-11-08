@@ -1,0 +1,70 @@
+<div class="modal" ng-controller="KisBpmMultiinstancePopupCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>会签策略配置</h2>
+			</div>
+			<div class="modal-body signConfig" id="assignment" data-ng-init="load()">
+				<input type="hidden" id="assignmentType">
+				<div class="row row-no-gutter " id="firstGutter">
+					<!-- <div class="form-group">
+						<label for="assigneeField">{{'PROPERTY.ASSIGNMENT.ASSIGNEE'
+							| translate}}</label> <input readonly="true" type="text"
+							id="assigneeField" class="form-control"
+							ng-model="assignment.assigneeHidden"
+							placeholder="{{'PROPERTY.ASSIGNMENT.ASSIGNEE_PLACEHOLDER' | translate}}" />
+						<span class="formIcon editor-icon editor-icon-delete" title="重置"
+							onClick="cleanPara(this)"></span> <span class="assignmentTootip"></span>
+						<input type="text" id="assigneeHidden"
+							ng-model="assignment.assignee" ng-click="assigneeClick()">
+					</div> -->
+					<div class="voteStyle">
+						<span>完成形式</span>：
+						<input type="radio" name="voteType" id="absoluteVote" value="1" ng-model="vote.voteType">绝对票数</input>
+						<input type="radio" name="voteType" id="percentVote" value="2" ng-model="vote.voteType">百分比</input><br/>
+					</div>
+					
+					<div class="voteStyle">
+						<span>票数</span>：<input id="voteNum" type="text" ng-model="vote.num" 
+		   					placeholder="请输入大于0的正整数"/><br/>
+					</div>
+					
+					<div class="voteStyle">
+						<span>表决制</span>：
+						<input type="radio" name="votingSystem" id="noIntegratedTicketing" value="1" ng-model="vote.votingSystem">无</input>
+						<input type="radio" name="votingSystem" id="most" value="2" ng-model="vote.votingSystem">少数服从多数</input>
+						<!-- <input type="radio" name="votingSystem" id="minority" value="3" ng-model="vote.votingSystem">多数服从少数</input><br/> -->
+					</div>
+					
+					<div class="voteStyle">
+						<span>表决人数达到多数后，是否结束会签</span>：
+						<input type="radio" name="endVote" id="endIsYes" value="1" ng-model="vote.endVote">是</input>
+						<input type="radio" name="endVote" id="endIsNo" value="2" ng-model="vote.endVote">否</input><br/>
+					</div>
+					
+					<div class="voteStyle">
+						<span>一票制</span>：
+						<input type="radio" name="integratedTicketing" id="noIntegratedTicketing" value="1" ng-model="vote.integratedTicketing">无</input>
+						<input type="radio" name="integratedTicketing" id="oneVoteAgree" value="2" ng-model="vote.integratedTicketing">一票同意</input>
+						<input type="radio" name="integratedTicketing" id="oneVoteVetoed" value="3" ng-model="vote.integratedTicketing">一票否决</input><br/>
+					
+					</div>
+					
+					<!-- <span>特权人员投票后，是否结束表决：</span>
+					<input type="radio" name="isOver" id="percentVote" value="1" ng-model="vote.isOver">是</input>
+					<input type="radio" name="isOver" id="percentVote" value="2" ng-model="vote.isOver">否</input><br/>
+					
+					<span>特权人员设置：</span><input type="text" id="person" value="请选择" ng-click="personClick()"/> -->
+				</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+				<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+			</div>
+		</div>
+	</div>
+</div>

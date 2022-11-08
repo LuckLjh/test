@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: ${MQ_SERVER:10.240.62.34}:${MQ_PORT:9876}
+  redis:
+    database: 0
+    password: ${REDIS_PASSWORD:redis@App2020}
+    host: ${REDIS_SERVER:10.240.63.260}
+    port: ${REDIS_PORT:7379}
+    #sentinel:
+    #  master: local-master
+    #  nodes:
+    #    - ${REDIS_SERVER_SENTINEL:archive-redis-sentinel}:26379
+  elasticsearch:
+    rest:
+      uris:
+        - http://${ELASTICSEARCH_SERVER:10.240.62.34}:${ELASTICSEARCH_PORT:9200}
+      username: ${ELASTICSEARCH_USERNAME:elastic}
+      password: ${ELASTICSEARCH_PASSWORD:elasticsearh@App2020}
+
+archive:
+  management:
+    medium:
+      basePath: ${CQBC_PATH:/cam/cqbc}/upload
+      restorePackageUrl: ${CQBC_URL:http://127.0.0.1:8226/SafeStorage}/services/jaxrs/batchOnlineService/getpacketPath
+      restorePackagePath: ${CQBC_PATH:/cam/cqbc}/in
+  python:
+    enabled: true
+    ip: ${AI_SERVER:10.240.62.34}
+    port: ${AI_PORT:5000}
+
+nginx:
+  storage:
+    url: http://10.240.62.29:18888

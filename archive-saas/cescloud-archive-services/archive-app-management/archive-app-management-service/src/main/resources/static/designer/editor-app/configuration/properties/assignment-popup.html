@@ -1,0 +1,75 @@
+<div class="modal" ng-controller="KisBpmAssignmentPopupCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>任务分配</h2>
+			</div>
+			<div class="modal-body" id="assignment">
+				<input type="hidden" id="assignmentType">
+				<div class="row row-no-gutter" id="firstGutter">
+					<div class="form-group">
+						<label for="assigneeField">{{'PROPERTY.ASSIGNMENT.ASSIGNEE'
+							| translate}}</label> <input readonly="true" type="text"
+							id="assigneeField" class="form-control"
+							ng-model="assignment.assigneeHidden"
+							placeholder="{{'PROPERTY.ASSIGNMENT.ASSIGNEE_PLACEHOLDER' | translate}}" />
+						<span class="formIcon editor-icon editor-icon-delete" title="重置"
+							onClick="cleanPara(this)"></span> <span class="assignmentTootip"></span>
+						<input type="text" id="assigneeHidden"
+							ng-model="assignment.assignee" ng-click="assigneeClick()">
+					</div>
+				</div>
+
+				<div class="row row-no-gutter">
+					<div class="form-group">
+						<label for="userField">{{'PROPERTY.ASSIGNMENT.CANDIDATE_USERS'
+							| translate}}</label> <input readonly="true" type="text" id="userField"
+							class="form-control" ng-model="assignment.candidateUsersHidden"
+							placeholder="{{'PROPERTY.ASSIGNMENT.ASSIGNEE_PLACEHOLDER' | translate}}" />
+						<span class="formIcon editor-icon editor-icon-delete" title="重置"
+							onClick="cleanPara(this)"></span> <span class="assignmentTootip"></span>
+						<!-- <div ng-repeat="candidateUser in assignment.candidateUsers">
+            	            
+            	            <i class="glyphicon glyphicon-minus clickable-property" ng-click="removeCandidateUserValue($index)"></i>
+            	            <i ng-if="$index == (assignment.candidateUsers.length - 1)" class="glyphicon glyphicon-plus clickable-property" ng-click="addCandidateUserValue($index)"></i>
+                        </div> -->
+						<input type="text" id="candidateUsersHidden"
+							ng-model="assignment.candidateUsers"
+							ng-click="candidateUsersClick()"
+							onmouseover="assignmentTootip(this)"
+							onmouseleave="assignmentTootipleave(this)">
+					</div>
+
+					<div class="form-group">
+						<label for="groupField">{{'PROPERTY.ASSIGNMENT.CANDIDATE_GROUPS'
+							| translate}}</label> <input readonly="true" type="text" id="groupField"
+							class="form-control" ng-model="assignment.candidateGroupsHidden"
+							placeholder="{{'PROPERTY.ASSIGNMENT.ASSIGNEE_PLACEHOLDER' | translate}}" />
+						<span class="formIcon editor-icon editor-icon-delete" title="重置"
+							onClick="cleanPara(this)"></span> <span class="assignmentTootip"></span>
+						<input type="text" id="candidateGroupsHidden"
+							ng-model="assignment.candidateGroups"
+							ng-click="candidateGroupsClick()"
+							onmouseover="assignmentTootip(this)"
+							onmouseleave="assignmentTootipleave(this)">
+						<!-- <div ng-repeat="candidateGroup in assignment.candidateGroups">
+
+							<i class="glyphicon glyphicon-minus clickable-property"
+								ng-click="removeCandidateGroupValue($index)"></i> <i
+								ng-if="$index == (assignment.candidateGroups.length - 1)"
+								class="glyphicon glyphicon-plus clickable-property"
+								ng-click="addCandidateGroupValue($index)"></i>
+						</div> -->
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+				<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+			</div>
+		</div>
+	</div>
+</div>

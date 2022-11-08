@@ -1,0 +1,8 @@
+<span ng-if="property.value.assignment.assignee" ng-hide="true">{{'PROPERTY.ASSIGNMENT.ASSIGNEE_DISPLAY' | translate:property.value.assignment }} </span>
+<span ng-if="property.value.assignment.candidateUsers" ng-hide="true">{{'PROPERTY.ASSIGNMENT.CANDIDATE_USERS_DISPLAY' | translate:property.value.assignment}} </span>
+<span ng-if="property.value.assignment.candidateGroups" ng-hide="true">{{'PROPERTY.ASSIGNMENT.CANDIDATE_GROUPS_DISPLAY' | translate:property.value.assignment}} </span>
+<span ng-if="!property.value.assignment.assignee && !property.value.assignment.candidateUsers  && !property.value.assignment.candidateGroups " translate>未设置值</span>
+
+<span ng-if="property.value.assignment.assignee">办理人：{{property.value.assignment.assigneeHidden}}</span>
+<span ng-if="property.value.assignment.candidateUsers">候选人：{{property.value.assignment.candidateUsersHidden}}</span>
+<span ng-if="property.value.assignment.candidateGroups">候选人组：{{property.value.assignment.candidateGroupsHidden}}</span>

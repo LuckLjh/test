@@ -1,0 +1,46 @@
+application:
+  baseUrl: ""
+logging:
+  level:
+    org.activiti.engine.impl.persistence.entity: trace
+
+spring:
+  cloud:
+    stream:
+      default-binder: rocketmq
+      rocketmq:
+        binder:
+          name-server: ${MQ_SERVER:archive-mq}:${MQ_PORT:9876}
+      bindings:
+        # 重新初始化sharding服务数据源生产者
+        sharding-task-output:
+          group: archive-app-management
+          destination: sharding-task
+          content-type: application/json
+        # 删除档案类型时通知索引服务删除对应表的索引数据
+        index-task-output:
+          group: inma-index-task
+          destination: inma-index-task
+          content-type: application/json
+        # 消息服务生产者配置
+        archive-message-output:
+          destination: message-service
+          content-type: application/json
+
+cescloud:
+  async:
+    business:
+      field:
+        corePoolSize: 1
+        maxPoolSize: 5
+        queueCapacity: 20
+        waitForJobsToCompleteOnShutdown: false
+        threadNamePrefix: asyncUpdateField-
+
+
+#配置不走统一权限拦截的菜单Id
+archive:
+  menu-auth:
+    filter-menu-id:
+      - 7001
+      - 8001

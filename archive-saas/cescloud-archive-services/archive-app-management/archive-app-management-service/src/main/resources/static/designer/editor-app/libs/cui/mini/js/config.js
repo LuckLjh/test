@@ -1,0 +1,1 @@
+$(function(){$(document).tooltip({items:"[data-errors]",content:function(){var a=$(this);if(a.is("[data-errors]")){return a.attr("data-errors")}},show:{effect:"fadeIn",delay:300},tooltipClass:"coral-state-error",hide:{effect:"fadeOut",delay:0},position:{my:"left top",at:"left bottom+5"}})});

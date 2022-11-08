@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../libs/cui/cui.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../libs/bootstrap_3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style-common.css">
+<script src="../../libs/jquery_1.11.0/jquery.min.js"
+	type="text/javascript"></script>
+<script src="../../libs/cui/cui.min.js" type="text/javascript"></script>
+</head>
+<body style="overflow: hidden; margin: 0;">
+
+	<div class="modal dialogmodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="closed()">&times;</button>
+					<h2 translate>操作配置</h2>
+				</div>
+				<div class="modal-body">
+
+					<form id="noticeForm">
+						<input name="id" type="hidden">
+						<table class="modelTable">
+							<tr>
+								<td>类型：</td>
+								<td><input id="type" name="combobox" value="0"></td>
+							</tr>
+							<tr>
+								<td>提醒人：</td>
+								<td><input id="receiver" type="text" name="textbox"></td>
+							</tr>
+							<tr>
+								<td>提醒时间：</td>
+								<td><input id="dueDate" name="datepicker"
+									value="2015-10-12"></td>
+							</tr>
+							<tr>
+								<td>提醒方式：</td>
+								<td><div id="notificationTypemsg" name="checkboxlist"
+										value="CN"></td>
+							</tr>
+							<tr>
+								<td>通用模板：</td>
+								<td><input id="templateCode" name="combobox" value="1"></td>
+							</tr>
+						</table>
+					</form>
+
+
+				</div>
+				<div class="modal-footer">
+					<button onclick="closed()" class="btn btn-primary">取消</button>
+					<button onclick="save()" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		$('#type').combobox({
+		    valueField:'value',
+		    textField:'text',
+		    iframePanel:true,
+		    data:[{value:"0",text:"到达"},
+	      			{value:"1",text:"完成"},
+	      			{value:"2",text:"超时"}
+	      		]
+		});
+		
+		$('#receiver').textbox({
+		});
+		
+		$('#dueDate').datepicker({
+		});
+		
+		$('#notificationTypemsg').checkboxlist({
+		    column:2,
+		    data:[
+		        {value:"msg",text:"msg"},
+		        {value:"mail",text:"mail"}
+		    ]
+		});
+		
+		$('#templateCode').combobox({
+		    valueField:'value',
+		    textField:'text',
+		    data:[{value:"0",text:"任务到达(任务处理人)"},
+	      		{value:"1",text:"任务到达(任务发起人)"}]
+		});
+             
+             function closed(){
+            	 var overlay = parent.document.getElementById("overlay");
+            	 var iframe = parent.document.getElementById("iframeNotice");
+            	 
+            	 overlay.parentNode.removeChild(overlay);
+            	 iframe.parentNode.removeChild(iframe);
+             }
+             
+             function save(){
+            	  var type = $("#type").combobox("getValue");           	 
+            	  var receiver = $("#receiver").textbox("getValue");
+            	  var dueDate = $("#dueDate").datepicker("getDate");
+            	  var notificationTypemsg=$("#notificationTypemsg").checkboxlist("getValue");
+            	  var templateCode=$("#templateCode").combobox("getValue");
+            	  var str=type+","+receiver+","+dueDate+","+notificationTypemsg+","+templateCode;
+
+            	  var noticeVlaue = parent.document.getElementById("oryx-notice");
+            	  var n = noticeVlaue.lastChild;
+            	  $('#oryx-notice').find('.value > .ng-scope').append('<span ng-if="property.value.dialog.dialogcontent3" class="ng-scope ng-binding">'+type+' </span>');
+            	  //('.value > .ng-scope').append('<span ng-if="property.value.dialog.dialogcontent" class="ng-scope ng-binding">'+type+' </span>');
+            	  
+            	  closed();
+             }
+             
+             
+</script>
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+
+<div class="modal" ng-controller="KisBpmEventListenersPopupCtrl">
+    <div class="modal-dialog modal-wide">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+                <h2>{{'PROPERTY.PROPERTY.EDIT.TITLE' | translate:property}}</h2>
+            </div>
+            <div class="modal-body">
+            
+                <div class="row row-no-gutter">
+                	<div class="col-xs-10">
+            	        <div ng-if="translationsRetrieved" class="kis-listener-grid" ng-grid="gridOptions"></div>
+            	        <div class="pull-right">
+            	            <div class="btn-group">
+            	                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.MOVE.UP | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="moveListenerUp()"><i class="glyphicon glyphicon-arrow-up"></i></a>
+            	                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.MOVE.DOWN | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="moveListenerDown()"><i class="glyphicon glyphicon-arrow-down"></i></a>
+            	            </div>
+            	            <div class="btn-group">
+            	                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.ADD | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="addNewListener()"><i class="glyphicon glyphicon-plus"></i></a>
+            	                <a class="btn btn-icon btn-lg" rel="tooltip" data-title="{{ACTION.REMOVE | translate}}" data-placement="bottom" data-original-title="" title="" ng-click="removeListener()"><i class="glyphicon glyphicon-minus"></i></a>
+            	            </div>
+            	        </div>
+            		</div>
+            	</div>
+            	
+            	<div class="row row-no-gutter" id="listeners">
+                  	<div ng-if="translationsRetrieved" ng-show="selectedListeners.length > 0" class="col-xs-6">
+            			<div class="form-group">
+            	        	<label for="userField">事件</label>
+            	            <div ng-repeat="eventDefinition in selectedListeners[0].events">
+            	            	<select id="eventField" class="form-control" ng-model="eventDefinition.event" ng-change="listenerDetailsChanged()">
+            	            		<option title="{{'EVENT_TYPE.ACTIVITY.COMPENSATE.TOOLTIP' | translate}}" value="ACTIVITY_COMPENSATE">节点补偿</option>
+            	            		<option title="{{'EVENT_TYPE.ACTIVITY.COMPLETED.TOOLTIP' | translate}}" value="ACTIVITY_COMPLETED">节点完成</option>
+            	            		<option title="bla" value="ACTIVITY_ERROR_RECEIVED">节点错误接收</option>
+            	            		<option value="ACTIVITY_MESSAGE_RECEIVED">节点消息接收</option>
+            	            		<option value="ACTIVITY_SIGNALED">节点信号接收</option>
+            	            		<option value="ACTIVITY_STARTED">节点执行</option>
+            	            		<option value="ENGINE_CLOSED">引擎关闭</option>
+            	            		<option value="ENGINE_CREATED">引擎创建</option>
+            	            		<option value="ENTITY_ACTIVATED">实体激活</option>
+            	                	<option value="ENTITY_CREATED">实体创建</option>
+            	                	<option value="ENTITY_DELETED">实体删除</option>
+            	                	<option value="ENTITY_INITIALIZED">实体初始化</option>
+            	                	<option value="ENTITY_SUSPENDED">实体暂停</option>
+            	                	<option value="ENTITY_UPDATED">实体更新</option>
+            	                	<option value="JOB_EXECUTION_FAILURE">作业执行失败</option>
+            	                	<option value="JOB_EXECUTION_SUCCESS">作业执行成功</option>
+            	                	<option value="JOB_RETRIES_DECREMENTED">作业失败_次数递减</option>
+            	                	<option title="{{'EVENT_TYPE.MEMBERSHIP.CREATED.TOOLTIP' | translate}}" value="MEMBERSHIP_CREATED">用户成员添加</option>
+            	                	<option title="{{'EVENT_TYPE.MEMBERSHIP.DELETED.TOOLTIP' | translate}}" value="MEMBERSHIP_DELETED">用户成员删除</option>
+            	                	<option title="{{'EVENT_TYPE.MEMBERSHIPS.DELETED.TOOLTIP' | translate}}" value="MEMBERSHIPS_DELETED">删除所有成员</option>
+            	                	<option title="{{'EVENT_TYPE.TASK.ASSIGNED.TOOLTIP' | translate}}" value="TASK_ASSIGNED">任务分配</option>
+            	                	<option title="{{'EVENT_TYPE.TASK.COMPLETED.TOOLTIP' | translate}}" value="TASK_COMPLETED">任务完成</option>
+            	                	<option value="PROCESS_STARTED">流程开始</option>
+            	                	<option value="PROCESS_COMPLETED">流程结束</option>
+            	                	<option value="TIMER_FIRED">定时器触发</option>
+            	                	<option title="{{'EVENT_TYPE.UNCAUGHT.BPMNERROR.TOOLTIP' | translate}}" value="UNCAUGHT_BPMN_ERROR">抛出未捕获的BPMN错误</option>
+            	                	<option title="{{'EVENT_TYPE.VARIABLE.CREATED.TOOLTIP' | translate}}" value="VARIABLE_CREATED">变量创建</option>
+            	                	<option title="{{'EVENT_TYPE.VARIABLE.DELETED.TOOLTIP' | translate}}" value="VARIABLE_DELETED">变量删除</option>
+            	                	<option title="{{'EVENT_TYPE.VARIABLE.UPDATED.TOOLTIP' | translate}}" value="VARIABLE_UPDATED">变量更新</option>
+            	               	</select>
+            		            <i ng-if="$index > 0" class="glyphicon glyphicon-minus clickable-property" ng-click="removeEventValue($index)"></i>
+            		            <i class="glyphicon glyphicon-plus clickable-property" ng-click="addEventValue($index)"></i>
+            	            </div>
+            	            <div class="form-group">
+            			   		<label for="classField">是否重新抛出事件？</label>
+            			   		<input type="checkbox" id="rethrowField" ng-model="selectedListeners[0].rethrowEvent" ng-change="listenerDetailsChanged()" />
+            				</div>
+            	       	</div>
+                     </div>
+                     <div ng-show="selectedListeners.length > 0 && selectedListeners[0].events[0].event" class="col-xs-6">
+                     	<div class="form-group special" ng-if="!selectedListeners[0].rethrowEvent">
+            		   		<label for="classField">{{'PROPERTY.EVENTLISTENERS.CLASS' | translate}}</label>
+            		   		<span class="tooltip iconfont icon-bangzhu taskTooltip"> 
+								<span class="tooltipbox">
+									<span class="tooltipcancel iconfont icon-shanchu"></span> 
+								    <span>请设置当监听器被触发时，所希望被关联执行的动作或外部事件</span>
+							     </span>
+							</span> 
+            		   		<!-- <input type="text" id="classField" class="form-control" maxlength="200" ng-model="selectedListeners[0].className" ng-change="listenerDetailsChanged()" ng-keyup="keyup()" placeholder="{{'PROPERTY.EVENTLISTENERS.CLASS.PLACEHOLDER' | translate}}" /> -->
+            		   		<!-- <input list="listener" id="classField" class="form-control" ng-model="selectedListeners[0].className" ng-change="listenerDetailsChanged()" ng-keyup="keyup()"  placeholder="{{'PROPERTY.EVENTLISTENERS.CLASS.PLACEHOLDER' | translate}}"  maxlength="200" />
+                            <datalist id="listener">
+                                 <option ng-repeat="item in listener" value="{{item.classpath}}">{{item.name}}</option> 
+                            </datalist> -->
+                            <div class="selectBox">
+								<div class="inputCase">
+									<input id="classField" ng-click="displayData()" ng-model="selectedListeners[0].className" ng-change="listenerDetailsChanged()" ng-keyup="keyup()"  placeholder="{{'PROPERTY.EVENTLISTENERS.CLASS.PLACEHOLDER' | translate}}" maxlength="200" class="imitationSelect" type="text">
+									<i class="fa fa-arrow"></i>
+								</div>
+							</div> 
+							<ul class="selectUl" style="display: none;">
+								<li ng-repeat="item in listener" oliid="{{item.value}}" oliname="{{item.text}}">{{item.text}}</li>
+							</ul>
+            			</div>
+            			<span class="errorText errortextId"></span>
+            			<div class="form-group" ng-if="!selectedListeners[0].rethrowEvent">
+            		   		<label for="delegateExpressionField">{{'PROPERTY.EVENTLISTENERS.DELEGATEEXPRESSION' | translate}}</label>
+            		   		<input type="text" id="delegateExpressionField" class="form-control" maxlength="200" ng-model="selectedListeners[0].delegateExpression" ng-change="listenerDetailsChanged()" ng-keyup="keyup()" placeholder="{{'PROPERTY.EVENTLISTENERS.DELEGATEEXPRESSION.PLACEHOLDER' | translate}}" />
+            			</div>
+            			<span class="errorText errortextName"></span>
+            			<div class="form-group" ng-if="!selectedListeners[0].rethrowEvent">
+            		   		<label for="entityTypeField">{{'PROPERTY.EVENTLISTENERS.ENTITYTYPE' | translate}}</label>
+            		   		<input type="text" id="entityTypeField" class="form-control" maxlength="200" ng-model="selectedListeners[0].entityType" ng-change="listenerDetailsChanged()" ng-keyup="keyup()" placeholder="{{'PROPERTY.EVENTLISTENERS.ENTITYTYPE.PLACEHOLDER' | translate}}" />
+            			</div>
+            			<span class="errorText errortextName2"></span>
+            			<div class="form-group" ng-if="selectedListeners[0].rethrowEvent">
+            		   		<label for="delegateExpressionField">{{'PROPERTY.EVENTLISTENERS.RETHROWTYPE' | translate}}</label>
+            		   		<select id="rethrowTypeField" class="form-control" ng-model="selectedListeners[0].rethrowType" ng-change="rethrowTypeChanged()">
+                                <option>error</option>
+                                <option>message</option>
+                                <option>signal</option>
+                                <option>globalSignal</option>
+                            </select>
+            			</div>
+            			<div class="form-group" ng-if="selectedListeners[0].rethrowType === 'error'">
+            		   		<label for="errorCodeField">{{'PROPERTY.EVENTLISTENERS.ERRORCODE' | translate}}</label>
+            		   		<input type="text" id="errorCodeField" class="form-control" ng-model="selectedListeners[0].errorcode" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EVENTLISTENERS.ERRORCODE.PLACEHOLDER' | translate}}" />
+            			</div>
+            			<div class="form-group" ng-if="selectedListeners[0].rethrowType === 'message'">
+            		   		<label for="messageNameField">{{'PROPERTY.EVENTLISTENERS.MESSAGENAME' | translate}}</label>
+            		   		<input type="text" id="messageNameField" class="form-control" ng-model="selectedListeners[0].messagename" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EVENTLISTENERS.MESSAGENAME.PLACEHOLDER' | translate}}" />
+            			</div>
+            			<div class="form-group" ng-if="selectedListeners[0].rethrowType === 'signal' || selectedListeners[0].rethrowType === 'globalSignal'">
+            		   		<label for="messageNameField">{{'PROPERTY.EVENTLISTENERS.SIGNALNAME' | translate}}</label>
+            		   		<input type="text" id="signalNameField" class="form-control" ng-model="selectedListeners[0].signalname" ng-change="listenerDetailsChanged()" placeholder="{{'PROPERTY.EVENTLISTENERS.SIGNALNAME.PLACEHOLDER' | translate}}" />
+            			</div>
+                     </div>
+                     <div ng-show="selectedListeners.length == 0" class="col-xs-6 muted no-property-selected" translate>未配置事件监听器</div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button ng-click="cancel()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+                <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>

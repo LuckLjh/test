@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>archive-app-management</artifactId>
+		<groupId>com.cescloud.saas.archive.service</groupId>
+		<version>8.1.3</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>archive-app-management-service</artifactId>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-app-management-api</artifactId>
+		</dependency>
+
+		<!-- 工作流4.0 -->
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-workflow-engine</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-storage-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-sys-management-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-sharding-management-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-management-api</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>com.cescloud.saas.archive.service</groupId>
+            <artifactId>cescloud-common-jasperreports</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-pdfa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-asian</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-mainpage-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-search-index-producer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>archive-storage-open</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>cescloud-common-dbupgrades</artifactId>
+		</dependency>
+		<!--config-->
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>cescloud-common-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>cescloud-common-hanlp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cescloud.saas.archive.service</groupId>
+			<artifactId>cescloud-common-easyexcel</artifactId>
+		</dependency>
+		<!-- dom4j xpath -->
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+		</dependency>
+		<!-- 达梦数据库 -->
+		<dependency>
+			<groupId>3rd.dm8</groupId>
+			<artifactId>Dm8JdbcDriver</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<!-- oracle驱动 -->
+		<dependency>
+			<groupId>3rd.oracle</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>8</version>
+		</dependency>
+		<!-- sqlserver驱动 -->
+		<dependency>
+			<groupId>3rd.sqlserver</groupId>
+			<artifactId>sqljdbc</artifactId>
+			<version>8.4.1.jre8</version>
+		</dependency>
+		<!-- 海量数据库 -->
+		<dependency>
+			<groupId>cn.com.vastdata</groupId>
+			<artifactId>vastbase</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- 达梦数据库hibernate5.x方言-->
+		<dependency>
+			<groupId>3rd.hibernate</groupId>
+			<artifactId>dm-hibernatedialect</artifactId>
+			<version>5.0</version>
+		</dependency>
+
+		<!-- 人大金仓数据库 -->
+		<dependency>
+			<groupId>com.kingbase8</groupId>
+			<artifactId>kingbase8</artifactId>
+			<version>8.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>kingbase8-hibernatedialect</artifactId>
+			<version>5.2.17.Finaldialect</version>
+		</dependency>
+		<!-- 人大金仓数据库 end -->
+		<!-- itext -->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7.js7</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+    </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+					<mainClass>
+						com.cescloud.saas.archive.service.ArchiveAppManagementApplication
+					</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>xls</nonFilteredFileExtension>
+						<nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.woff</exclude>
+					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.eot</exclude>
+					<exclude>**/*.svg</exclude>
+					<exclude>**/*.swf</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.woff</include>
+					<include>**/*.ttf</include>
+					<include>**/*.eot</include>
+					<include>**/*.svg</include>
+					<include>**/*.swf</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+</project>

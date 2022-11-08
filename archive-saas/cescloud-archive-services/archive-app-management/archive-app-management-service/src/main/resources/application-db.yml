@@ -1,0 +1,336 @@
+
+---
+# mysql的dev环境
+spring:
+  profiles: mysql-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    url: jdbc:mysql://127.0.0.1:3306/ces_cloud_saas_app?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: dev
+    password: ENC(etGnhOJbUxuFdA7vYMxtkw/Uo87/BksK6l2DaMevgNE=)
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# mysql的test环境
+spring:
+  profiles: mysql-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER:test}
+    password: ENC(etGnhOJbUxuFdA7vYMxtkw/Uo87/BksK6l2DaMevgNE=)
+    url: jdbc:mysql://${DB_HOST:archive-db}:${DB_PORT:3306}/${DB_NAME:test_ces_cloud_saas_app}?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 20
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# mysql8.0的 临时压测 环境
+spring:
+  profiles: mysql-yace
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root1
+    password: ENC(tRNZaDmCF7/HEGnlU9ZlghJqBwHD16Tr)
+    url: jdbc:mysql://${DB_HOST:20.1.1.233}:${DB_PORT:3306}/test_ces_cloud_saas_app?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 20
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+---
+
+# mysql的prod环境
+spring:
+  profiles: mysql-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:archive-db}:${DB_PORT:3306}/${DB_NAME:prod_ces_cloud_saas_app}?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:prod}
+    password: ENC(etGnhOJbUxuFdA7vYMxtkw/Uo87/BksK6l2DaMevgNE=)
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+
+# mysql的shyh-uat环境
+spring:
+  profiles: mysql-shyh-uat
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:10.240.98.151}:${DB_PORT:3353}/${DB_NAME:cam_uat_app}?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:cam}
+    password: ENC(CW/QKnCC9QKAR/S1cbU6Vja+Xvlh30zK)
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+
+# mysql的shyh-test环境
+spring:
+  profiles: mysql-shyh-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:10.240.98.151}:${DB_PORT:3352}/${DB_NAME:cam_sit_app}?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:cam}
+    password: ENC(CW/QKnCC9QKAR/S1cbU6Vja+Xvlh30zK)
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+
+# mysql的shyh-prod环境
+spring:
+  profiles: mysql-shyh-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:10.240.98.66}:${DB_PORT:3323}/${DB_NAME:cam_pi_app}?characterEncoding=utf8&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:cam}
+    password: ENC(CW/QKnCC9QKAR/S1cbU6Vja+Xvlh30zK)
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+      #connection-timeout: 1000 #获取连接的超时时间
+      #register-mbeans: true #debug连接数时可开启,通过压力测试，监控JConsole连接数变化。
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+
+# 达梦数据库的dev环境
+spring:
+  profiles: dm-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: dm.jdbc.driver.DmDriver
+    username: CES_CLOUD_SAAS_APP
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:dm://180.168.156.211:4435
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# 达梦数据库的test环境
+spring:
+  profiles: dm-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: dm.jdbc.driver.DmDriver
+    username: ${DB_USER:CES_CLOUD_SAAS_APP}
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:dm://${DB_HOST:20.1.1.130}:${DB_PORT:5236}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 20
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# 达梦数据库的prod环境
+spring:
+  profiles: dm-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: dm.jdbc.driver.DmDriver
+    username: ${DB_USER:CES_CLOUD_SAAS_APP}
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:dm://${DB_HOST:20.1.1.130}:${DB_PORT:5236}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# oracle数据库dev环境
+spring:
+  profiles: oracle-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: ${DB_USER:CES_CLOUD_SAAS_APP}
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:oracle:thin:@${DB_HOST:180.168.156.211}:${DB_PORT:4564}:${DB_NAME:orcl}
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# oracle数据库test环境
+spring:
+  profiles: oracle-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: ${DB_USER:CES_CLOUD_SAAS_APP}
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:oracle:thin:@${DB_HOST:20.1.1.109}:${DB_PORT:1521}:${DB_NAME:orcl}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 20
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# oracle数据库prod环境
+spring:
+  profiles: oracle-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: ${DB_USER:CES_CLOUD_SAAS_APP}
+    password: ENC(Q2BqOd+/g6v4KiM7URiRASzKy6FVpOh8cXv78VhQJoM=)
+    url: jdbc:oracle:thin:@${DB_HOST:20.1.1.109}:${DB_PORT:1521}:${DB_NAME:orcl}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# sqlserver数据库dev环境
+spring:
+  profiles: sqlserver-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: ENC(cwae+8MRmEhGlTWVWJecuNtjC2fmUh2g)
+    url: jdbc:sqlserver://180.168.156.211:4553;DatabaseName=CES_CLOUD_SAAS_APP
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
+
+---
+# sqlserver数据库test环境
+spring:
+  profiles: sqlserver-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${DB_USER:sa}
+    password: ENC(cwae+8MRmEhGlTWVWJecuNtjC2fmUh2g)
+    url: jdbc:sqlserver://${DB_HOST:20.1.1.149}:${DB_PORT:1433};DatabaseName=${DB_NAME:CES_CLOUD_SAAS_APP}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 20
+
+---
+# sqlserver数据库prod环境
+spring:
+  profiles: sqlserver-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${DB_USER:sa}
+    password: ENC(cwae+8MRmEhGlTWVWJecuNtjC2fmUh2g)
+    url: jdbc:sqlserver://${DB_HOST:20.1.1.149}:${DB_PORT:1433};DatabaseName=${DB_NAME:CES_CLOUD_SAAS_APP}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+
+
+---
+# 海量数据库的dev环境
+spring:
+  profiles: vastbase-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:10.250.198.33}:${DB_PORT:5432}/bslttest
+    #test_ces_cloud_saas_sys
+    username: ces_cloud_saas_app
+    password: test@123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# 人大金仓数据库的dev环境
+spring:
+  profiles: kingbase-dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.kingbase8.Driver
+    url: jdbc:kingbase8://${DB_HOST:10.250.199.138}:${DB_PORT:54321}/TEST?currentSchema=ces_cloud_saas_app
+    username: ces_cloud_saas_app
+    password: cesGroup@123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+---
+# 人大金仓数据库的 test 环境
+spring:
+  profiles: kingbase-test
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.kingbase8.Driver
+    url: jdbc:kingbase8://${DB_HOST:10.250.199.138}:${DB_PORT:54321}/TEST?currentSchema=ces_cloud_saas_app
+    username: ces_cloud_saas_app
+    password: cesGroup@123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
+
+
+---
+# 人大金仓数据库的 prod 环境
+spring:
+  profiles: kingbase-prod
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.kingbase8.Driver
+    url: jdbc:kingbase8://${DB_HOST:10.250.199.138}:${DB_PORT:54321}/TEST?currentSchema=ces_cloud_saas_app
+    username: ces_cloud_saas_app
+    password: cesGroup@123
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 40
+  resources:
+    static-locations: classpath:/static/,classpath:/views/

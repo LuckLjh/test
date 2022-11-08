@@ -1,0 +1,41 @@
+
+<div class="modal" ng-controller="KisBpmDuedatedefinitionPopupCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>办理时限</h2>
+			</div>
+			<div class="modal-body">
+
+				<div class="detail-group clearfix">
+
+					<div class="form-group clearfix">
+						<div class="col-xs-12">
+							<label class="col-xs-3">时间：</label>
+							<div class="col-xs-9">
+								<input id="timerYear"
+									onkeyup="value=value.replace(/[^0-9]/g,'')"
+									onpaste="value=value.replace(/[^0-9]/g,'')"
+									ng-blur="yearInputBlurred()" maxlength="2" value="0"> <span>月</span>
+								<input id="timerDay" onkeyup="value=value.replace(/[^0-9]/g,'')"
+									onpaste="value=value.replace(/[^0-9]/g,'')" maxlength="3"
+									ng-blur="inputBlurred()" ng-keypress="enterPressed($event)"
+									value="0"> <span>天</span> <select id="timerHour"></select>
+								<span>时</span> <select id="timerMinute"></select> <span>分</span>
+								<select id="timerSecond"></select> <span>秒</span>
+
+							</div>
+							<div ng-model="duedatedefinition.value" ng-hide="true"></div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+					<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+				</div>
+			</div>
+		</div>
+	</div>

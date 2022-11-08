@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cescloud.saas.archive.api.modular.syssetting.support.SysSettingCacheAutoConfiguration,\
+  com.cescloud.saas.archive.api.modular.metadata.cachesupport.MetadataCacheAutoConfiguration,\
+  com.cescloud.saas.archive.api.modular.businessconfig.cachesupport.BusinessMetadataCacheAutoConfiguration

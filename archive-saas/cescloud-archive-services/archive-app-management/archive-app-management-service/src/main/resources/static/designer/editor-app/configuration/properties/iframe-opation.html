@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../libs/cui/cui.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../libs/bootstrap_3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style-common.css">
+<script src="../../libs/jquery_1.11.0/jquery.min.js"
+	type="text/javascript"></script>
+<script src="../../libs/cui/cui.min.js" type="text/javascript"></script>
+</head>
+<body style="overflow: hidden; margin: 0;">
+
+	<div class="modal dialogmodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="closed()">&times;</button>
+					<h2 translate>通知配置</h2>
+				</div>
+				<div class="modal-body">
+
+					<div class="checkboxBorder">
+						<input id="chk1" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'claimTask',label:'认领任务(claimTask)'" /> <input
+							id="chk2" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'releaseTask',label:'释放任务(releaseTask)'" />
+					</div>
+					<div class="checkboxBorder">
+						<input id="chk3" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'saveDraft',label:'保存草稿(saveDraft)'" /> <input
+							id="chk4" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'transfer',label:'转办(transfer)'" /> <input
+							id="chk5" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'takeback',label:'收回(takeback)'" /> <input
+							id="chk6" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'solve',label:'解决(solve)'" />
+					</div>
+					<div class="checkboxBorder">
+						<input id="chk7" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackPrevious',label:'回退（上一步）(rollbackPrevious)'" />
+						<input id="chk8" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackAssignee',label:'回退（指定负责人）(rollbackAssignee)'" />
+						<input id="chk9" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackActivity',label:'回退（指定步骤）(rollbackActivity)'" />
+						<input id="chk10" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackActivityAssignee',label:'退回（指定步骤，指定负责人）(rollbackActivityAssignee)'" />
+						<input id="chk11" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackStart',label:'回退（开始节点）(rollbackStart)'" />
+						<input id="chk12" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'rollbackInitiator',label:'回退（发起人）(rollbackInitiator)'" />
+						<input id="chk13" class="coralui-checkbox" name="chk"
+							type="checkbox" data-options="value:'jump',label:'自由跳转(jump)'" />
+					</div>
+					<div class="checkboxBorder">
+						<input id="chk14" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'addCounterSign',label:'加签(addCounterSign)'" />
+						<input id="chk15" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'minusCounterSign',label:'减签(minusCounterSign)'" />
+					</div>
+					<div class="checkboxBorder">
+						<input id="chk16" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'suspendProcess',label:'暂停流程(suspendProcess)'" />
+						<input id="chk17" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'endProcess',label:'终止流程(endProcess)'" /> <input
+							id="chk18" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'resumeProcess',label:'恢复流程(resumeProcess)'" />
+					</div>
+					<div class="checkboxBorder">
+						<input id="chk19" class="coralui-checkbox" name="chk"
+							type="checkbox"
+							data-options="value:'reminder',label:'催办(reminder)'" /> <input
+							id="chk20" class="coralui-checkbox" name="chk" type="checkbox"
+							data-options="value:'completeTask',label:'完成任务(completeTask)'" />
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button onclick="closed()" class="btn btn-primary">取消</button>
+					<button onclick="save()" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		
+             
+             function closed(){
+            	 var overlay = parent.document.getElementById("overlay");
+            	 var iframe = parent.document.getElementById("iframeOpation");
+            	 
+            	 overlay.parentNode.removeChild(overlay);
+            	 iframe.parentNode.removeChild(iframe);
+             }
+             
+             function save(){
+            	             	 
+             }
+             
+             
+</script>
+</body>
+</html>
+

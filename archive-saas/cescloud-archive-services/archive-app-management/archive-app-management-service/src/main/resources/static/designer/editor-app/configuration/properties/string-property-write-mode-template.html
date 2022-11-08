@@ -1,0 +1,56 @@
+
+<div ng-controller="KisBpmStringPropertyCtrl">
+            
+    <!-- 名称 限制20 -->
+	<input ng-if=" property.key =='oryx-name'"  type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+           maxlength="20"
+           ng-keyup="enterUp($event)"
+            />
+            
+     <!-- id 限制10 -->
+	<input ng-if=" property.key == 'oryx-overrideid'"  type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+           onkeyup="value=value.replace(/[^\a-\z\A-\Z]/g,'')"
+		   onpaste="value=value.replace(/[^\a-\z\A-\Z]/g,'')"
+           maxlength="10"
+           placeholder="输入10个字符以内的英文字符"
+            />
+            
+           
+            
+         <!-- 启动器 限制64 -->
+     <input ng-if="property.key == 'oryx-initiator'"  type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+           maxlength="64"
+            />
+            
+           
+            
+                 <!-- 表单标识 限制255 -->
+     <input ng-if="property.key == 'oryx-formkeydefinition'"  type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+           maxlength="255"
+            />
+            
+            <!-- 其他 -->
+     <input ng-if="property.key !='oryx-name' && property.key != 'oryx-overrideid' && property.key != 'oryx-initiator' && property.key != 'oryx-formkeydefinition'" type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+           maxlength="200"
+            />
+</div>

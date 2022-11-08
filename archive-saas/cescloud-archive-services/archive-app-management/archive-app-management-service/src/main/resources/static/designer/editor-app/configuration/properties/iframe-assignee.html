@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css"
+	href="../../libs/ztree/css/zTreeStyle.css">
+<link rel="stylesheet" type="text/css"
+	href="../../libs/bootstrap_3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/style-common.css">
+<link rel="stylesheet" type="text/css" href="../../css/style-config.css">
+</head>
+<body style="overflow: hidden; margin: 0;">
+
+	<div class="modal dialogmodal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" onclick="closed()">&times;</button>
+					<h2 translate>任务分配 - 办理人</h2>
+				</div>
+				<div class="modal-body">
+
+					<div class="modalRadiobox">
+						<form>
+							<span> <label><input type="radio" checked
+									name="user" id="user" value="user">用户</label>
+							</span>
+							<!-- <span>
+            				<label><input type="radio" name="user" id="depart" value="depart">部门</label>
+            			</span> -->
+							<span> <label><input type="radio" name="user"
+									id="role" value="role">角色</label>
+							</span> <span> <label><input type="radio" name="user"
+									id="processSponsor" value="processSponsor">流程发起人</label>
+							</span>
+							<!-- <span>
+            				<label><input type="radio" name="user" id="dealPeople" value="dealPeople">上一节点处理人</label>
+            			</span> -->
+						<!-- 	<span> <label><input type="radio" name="user"
+									id="expression" value="expression">表达式</label>
+							</span> -->
+						</form>
+					</div>
+
+					<div class="modalLeft" id="modalLeft">
+						<ul id="tree" class="ztree modalullist"></ul>
+					</div>
+
+					<div class="modalMiddle" id="modalMiddle">
+						<ul id="tree2" class="ztree modalullist"></ul>
+					</div>
+
+					<div class="modalCon">
+						<table>
+							<tr>
+								<td>
+									<p>
+										<span class="" id="moveCheck" onclick="moveCheck()" title="右移">></span>
+									</p>
+
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="modalRight" id="modalRight">
+						<ul id="tree3" class="ztree modalullist"></ul>
+						<div id="expressionBox"></div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button onclick="deleteAll()" class="btn btn-primary">重置</button>
+					<button onclick="closed()" class="btn btn-primary">取消</button>
+					<button onclick="save()" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../../libs/jquery_1.11.0/jquery.min.js"
+		type="text/javascript"></script>
+	<script src="../../libs/ztree/jquery.ztree.core-3.5.js"
+		type="text/javascript"></script>
+	<script src="../../libs/ztree/jquery.ztree.excheck-3.5.min.js"
+		type="text/javascript"></script>
+	<script src="../../libs/ztree/jquery.ztree.exedit-3.5.min.js"
+		type="text/javascript"></script>
+	<script
+		src="../../configuration/properties-iframe-assignment-controller.js"
+		type="text/javascript"></script>
+
+
+</body>
+</html>
+

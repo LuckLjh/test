@@ -1,0 +1,53 @@
+server:
+  port: 10000
+  undertow:
+    max-http-post-size: 0
+    io-threads: 4
+    worker-threads: 32
+    buffer-size: 1024
+    direct-buffers: true
+
+spring:
+  application:
+    name: "@artifactId@"
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: "@spring.profiles.active@"
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 1000MB
+
+# 注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadataMap:
+      version: 1.0
+      group: cescloud-archive-group
+      region: dev
+  client:
+    service-url:
+      defaultZone: "@eureka-default-zone@"
+    healthcheck:
+      enabled: true
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: always
+#    refresh:
+#      enabled: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# spring.cloud.config.refreshInterval
+
+#开启此配置后,可在spring-boot-admin中实时查看debug日志
+logging:
+  file: logs/${spring.application.name}/debug.log

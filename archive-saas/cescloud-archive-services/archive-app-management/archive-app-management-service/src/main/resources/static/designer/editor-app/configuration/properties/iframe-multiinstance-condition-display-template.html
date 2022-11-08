@@ -1,0 +1,22 @@
+<span ng-if="property.value.vote.voteType==1">投票形式:绝对票数 </span>
+<span ng-if="property.value.vote.voteType!=1">投票形式:百分比 </span>
+
+<span ng-if="property.value.vote.voteType==2 && property.value.vote.num">票数:{{property.value.vote.num}}%</span>
+<span ng-if="property.value.vote.voteType==1 && property.value.vote.num">票数:{{property.value.vote.num}}票</span>
+
+<span ng-if="property.value.vote.votingSystem==1">表决制:无 </span>
+<span ng-if="property.value.vote.votingSystem==2">表决制:少数服从多数 </span>
+<span ng-if="property.value.vote.votingSystem==3">表决制:多数服从少数 </span>
+
+<span ng-if="property.value.vote.endVote==1">表决人数达到多数后，是否结束会签:是 </span>
+<span ng-if="property.value.vote.endVote==2">表决人数达到多数后，是否结束会签:否 </span>
+
+<span ng-if="property.value.vote.integratedTicketing==1">一票制:无</span>
+<span ng-if="property.value.vote.integratedTicketing==2">一票制:一票同意</span>
+<span ng-if="property.value.vote.integratedTicketing==3">一票制:一票否决</span>
+
+<span ng-if="property.value.vote.isOver==1">特权人员投票后，是否结束表决:是</span>
+<span ng-if="property.value.vote.isOver==2">特权人员投票后，是否结束表决:否</span>
+
+<span ng-if="property.noValue" translate>PROPERTY.EMPTY</span>
+

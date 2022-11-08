@@ -1,0 +1,16 @@
+
+<span
+	ng-if="!property.noValue && property.value !='None' && property.value !='Parallel' && property.value !='Sequential' &&property.key!='oryx-callactivitycalledelement'">{{property.value|limitTo:20}}</span>
+<span
+	ng-if="!property.noValue && property.value != null && property.value.length > 20">...</span>
+<span ng-if="property.noValue" translate>PROPERTY.EMPTY</span>
+
+<span ng-if="property.value =='None'">无</span>
+<span ng-if="property.value =='Parallel'">并行</span>
+<span ng-if="property.value =='Sequential'">串行</span>
+
+
+<span ng-if="property.key=='oryx-callactivitycalledelement'"
+	id="callactivitycalledelementValue">{{property.valueHidden.name|limitTo:20}}</span>
+<span ng-if="property.key=='oryx-callactivitycalledelement'"
+	ng-hide="true">{{property.value|limitTo:20}}</span>

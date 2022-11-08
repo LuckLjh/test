@@ -1,0 +1,19 @@
+application:
+  baseUrl: ""
+logging:
+  level:
+    org.activiti.engine.impl.persistence.entity: trace
+
+spring:
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
+
+# 是否开启接口统计-建议生产酌情开启
+actuator:
+  enable: true
+
+

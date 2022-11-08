@@ -1,0 +1,188 @@
+<div ng-controller="StencilController">
+	<div class="subheader editor-toolbar" id="editor-header">
+		<div class="btn-group">
+			<div class="btn-toolbar pull-left" ng-controller="ToolbarController"
+				ng-cloak>
+				<button id="{{item.id}}" title="{{item.title | translate}}"
+					ng-repeat="item in items" ng-switch on="item.type"
+					class="btn btn-inverse"
+					ng-class="{'separator': item.type == 'separator'}"
+					ng-disabled="item.type == 'separator' || item.enabled == false"
+					ng-click="toolbarButtonClicked($index)">
+					<span ng-switch-when="button" class="toolbar-button"
+						data-toggle="tooltip" title="{{item.title | translate}}"> <span
+						ng-class="item.cssClass"></span><span class="editorText">{{item.name
+							| translate}}</span>
+					</span>
+					<div ng-switch-when="separator" ng-class="item.cssClass"></div>
+				</button>
+			</div>
+		</div>
+		<!-- <div class="btn-group pull-right" ng-show="!secondaryItems.length">
+	        <div class="btn-toolbar pull-right" ng-controller="ToolbarController">
+        	<button title="{{item.title | translate}}" ng-repeat="item in secondaryItems" ng-switch on="item.type" class="btn btn-inverse" ng-class="{'separator': item.type == 'separator'}"
+                ng-disabled="item.type == 'separator'" ng-click="toolbarSecondaryButtonClicked($index)" id="{{item.id}}">
+        		<i ng-switch-when="button" ng-class="item.cssClass" class="toolbar-button" data-toggle="tooltip" title="{{item.title | translate}}"></i>
+	            <div ng-switch-when="separator" ng-class="item.cssClass"></div>
+        	</button>
+  		  </div>
+        </div> -->
+	</div>
+	<div class="full">
+		<div class="row row-no-gutter">
+			<div id="paletteHelpWrapper" class="col-xs-3">
+				<div class="stencils" id="paletteSection">
+					<div ng-if="stencilItemGroups.length > 1">
+						<div ng-repeat="group in stencilItemGroups">
+
+							<ul ng-if="group.visible && group.items" class="stencil-group"
+								ng-class="{collapsed: !group.expanded, 'first': $first}">
+								<li
+									ng-include="'editor-app/partials/stencil-item-template.html?version=4'"></li>
+							</ul>
+
+							<div ng-if="!group.items"
+								ng-include="'editor-app/partials/root-stencil-item-template.html?version=4'"></div>
+
+						</div>
+					</div>
+					<div ng-if="stencilItemGroups.length == 1">
+						<ul class="stencil-group">
+							<li ng-repeat="item in stencilItemGroups[0].paletteItems"
+								class="stencil-item" id="{{item.id}}"
+								title="{{item.description}}" ng-model="draggedElement"
+								data-drag="true"
+								jqyoui-draggable="{onStart:'startDragCallback', onDrag:'dragCallback'}"
+								data-jqyoui-options="{revert: 'invalid', helper: 'clone', opacity : 0.5}">
+
+								<img ng-src="editor-app/stencilsets/bpmn2.0/icons/{{item.icon}}"
+								width="16px;" height="16px;" /> {{item.name}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="canvasHelpWrapper" class="col-xs-9">
+				<div class="canvas-wrapper" id="canvasSection"
+					ng-model="droppedElement" ng-model="droppedElement"
+					data-drop="true" data-jqyoui-options
+					jqyoui-droppable="{onDrop:'dropCallback',onOver: 'overCallback', onOut: 'outCallback'}">
+					<div class="canvas-message" id="model-modified-date"></div>
+					<div class="Oryx_button" id="delete-button"
+						title="{{'BUTTON.ACTION.DELETE.TOOLTIP' | translate}}"
+						ng-click="deleteShape()" style="display: none">
+						<img src="editor-app/images/delete.png" />
+					</div>
+					<div class="Oryx_button" id="morph-button"
+						title="{{'BUTTON.ACTION.MORPH.TOOLTIP' | translate}}"
+						ng-click="morphShape()" style="display: none">
+						<img src="editor-app/images/wrench.png" />
+					</div>
+					<div class="Oryx_button" ng-repeat="item in quickMenuItems"
+						id="{{item.id}}" title="{{item.description}}"
+						ng-click="quickAddItem(item.id)" ng-model="draggedElement"
+						data-drag="true"
+						jqyoui-draggable="{onStart:'startDragCallbackQuickMenu', onDrag:'dragCallbackQuickMenu'}"
+						data-jqyoui-options="{revert: 'invalid', helper: 'clone', opacity : 0.5}"
+						style="display: none" ng-if="item.id !='Association'">
+						<img ng-src="editor-app/stencilsets/bpmn2.0/icons/{{item.icon}}" />
+					</div>
+				</div>
+			</div>
+			<div id="propertiesHelpWrapper" class="col-xs-9">
+				<div class="propertySection" id="propertySection"
+					ng-class="{collapsed: propertyWindowState.collapsed}">
+					<div class="selected-item-section">
+						<div class="clearfix">
+							<div class="pull-right" ng-if="selectedItem.auditData.createDate">
+								<strong>{{'ELEMENT.DATE_CREATED' | translate}}: </strong>
+								{{selectedItem.auditData.createDate}}
+							</div>
+							<div class="pull-right" ng-if="selectedItem.auditData.author">
+								<strong>{{'ELEMENT.AUTHOR' | translate}}: </strong>
+								{{selectedItem.auditData.author}}
+							</div>
+							<div class="selected-item-title">
+								<a ng-click="propertyWindowState.toggle()"> <i
+									class="glyphicon"
+									ng-class="{'glyphicon-chevron-right': propertyWindowState.collapsed, 'glyphicon-chevron-down': !propertyWindowState.collapsed}"></i>
+									<span
+									ng-show="selectedItem.title != undefined && selectedItem.title != null && selectedItem.title.length > 0">{{selectedItem.title}}</span>
+									<span
+									ng-show="!selectedItem || selectedItem.title == undefined || selectedItem.title == null || selectedItem.title.length == 0">{{modelData.name}}</span>
+								</a>
+							</div>
+						</div>
+						<div class="selected-item-body">
+							<div>
+								<div class="property-row"
+									ng-repeat="property in selectedItem.properties"
+									ng-click="propertyClicked($index)" on-repeat-finished-render
+									ng-class="{'clear' : $index%2 == 0}" id="{{property.key}}">
+
+									<div
+										ng-if="property.key == 'oryx-process_id' ||
+										property.key == 'oryx-multiinstance_collection' || property.key == 'oryx-multiinstance_variable' || 
+										property.key == 'oryx-multiinstance_condition_hidden'"
+										id="opacity" class="opacity"></div>
+									<div
+										ng-if="property.key == 'oryx-multiinstance_condition'"
+										id="opacity-hidden" class="opacity"></div>
+									<div
+										ng-if="property.key == 'oryx-conditionsequenceflow'"
+										id="opacity-hidden" class="opacity"></div>
+
+
+
+									<!-- <span class="tooltip iconfont icon-bangzhu"> <span
+										class="tooltipbox"><span
+											class="tooltipcancel iconfont icon-shanchu"></span> <span
+											ng-if="property.key == 'oryx-timercycledefinition' || property.key == 'oryx-timerdurationdefinition' || property.key == 'oryx-timerdatedefinition' || property.key == 'oryx-duedatedefinition' ">
+												<span style="font-weight: bold; font-size: 14px;">时间段表示法</span><br />
+												如果要表示某一作为一段时间的时间期间，前面加一大写字母P，但时间段后都要加上相应的代表时间的大写字母。如在一年三个月五天六小时七分三十秒内，可以写成<span
+												style="font-weight: bold">P1Y3M5DT6H7M30S。</span><br /> <span
+												style="font-weight: bold; font-size: 14px;">循环时间表示法</span><br />
+												前面加上一大写字母R，格式为： R【循环次数】【/开始时间】/时间间隔【/结束时间】
+												如要从2004年5月6日北京时间下午1点起时间间隔半年零5天3小时循环，且循环3次，可以表示为<span
+												style="font-weight: bold">R3/20040506T130000+08/P0Y6M5DT3H0M0S。</span>
+												如以1年2个月为循环间隔，无限次循环，最后循环终止于2025年1月1日，可表示为<span
+												style="font-weight: bold">R/P1Y2M/20250101</span>
+
+										</span> <span ng-if="property.key == 'oryx-multiinstance_condition'">
+												<span style="font-weight: bold; font-size: 14px;">填写规则：</span><br>
+												nrOfInstances：实例总数<br>
+												nrOfActiveInstances：当前活动的，比如，还没完成的，实例数量。 对于顺序执行的多实例，值一直为1。<br>
+												nrOfCompletedInstances：已经完成实例的数目。<br>
+												填写的时候使用表达式来表述当前并行会签节点的完成状况，比如${nrOfCompletedInstances/nrOfInstances
+												> 0.6} 表示只要有六成的人完成任务就算会签完成。此处也可以填写表达式，比如spring管理的bean为
+												aService ，中间包含判断会签最后形成的决议结果的方法
+												aService.checkCounterSign，那么这里输入
+												${aService.checkCounterSign()} 手写方法进行判断。
+										</span> <span>{{property.description}}</span> </span>
+									    </span> -->
+									    <span class="title"
+										   ng-if="!property.hidden && property.title =='任务分配'">{{
+										   property.title }}&nbsp; <span class="coral-validate-required"
+										   style="color: red;">※</span>:
+									   </span> <span class="title"
+										ng-if="!property.hidden && property.title !='任务分配'">{{
+										property.title }}&nbsp;:</span> <span class="title-removed"
+										ng-if="property.hidden"><i>{{ property.title
+											}}&nbsp;({{'PROPERTY.REMOVED' | translate}})&nbsp;:</i></span> <span
+										class="value"> <ng-include
+											src="getPropertyTemplateUrl($index)"
+											ng-if="!property.hasReadWriteMode"></ng-include> <ng-include
+											src="getPropertyReadModeTemplateUrl($index)"
+											ng-if="property.hasReadWriteMode && property.mode == 'read'"></ng-include>
+										<ng-include src="getPropertyWriteModeTemplateUrl($index)"
+											ng-if="property.hasReadWriteMode && property.mode == 'write'"></ng-include>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

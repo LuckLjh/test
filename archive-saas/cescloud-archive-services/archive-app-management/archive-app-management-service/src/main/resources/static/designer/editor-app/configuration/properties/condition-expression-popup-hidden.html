@@ -1,0 +1,153 @@
+
+<div class="modal" ng-controller="KisBpmConditionExpressionPopupHiddenCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>PROPERTY.SEQUENCEFLOW.CONDITION.TITLE</h2>
+			</div>
+			<div class="modal-body" id="flowCon">
+				<div class="detail-group clearfix">
+					<!-- 错误提示语 -->
+					<span class="errorText errortextName2"></span>
+					<div class="form-group clearfix">
+						<!-- <div class="col-xs-12">
+							<label class="col-xs-3">{{'PROPERTY.SEQUENCEFLOW.CONDITION.STATIC'
+								| translate}}</label>
+							<div class="col-xs-9">
+								<textarea class="form-control"
+									ng-model="conditionExpression.value"
+									style="width: 90%; height: 100%; max-width: 100%; max-height: 100%; min-height: 100px" />
+							</div>
+						</div> -->
+
+						<!-- 顺序流条件 -->
+						<!-- <table>
+								<tr align="center">
+			            			<td class="tdSelect" >关联条件</td>
+			            			<td class="tdSelect" >字段名</td>
+			            			<td class="tdSelect" >判断条件</td>
+			            			<td class="tdTitles" >值</td>
+			            			<td class="tdSelect" >判断顺序</td>
+				                </tr>
+			             </table> -->
+						<div class="row row-no-gutter" ng-init="init()">
+		                  	<div ng-show="conditionExpression.length > 0" >
+		            			<div class="form-group">
+		            	            <div ng-repeat="expression in conditionExpression[0].expressions">
+		            	            	<!-- 左括号 -->
+		            	            	<select ng-model="expression.left_parentheses" ng-init="leftLoad()">
+					            	            	<option value=""></option>
+					            	            	<option ng-repeat="x in left_parentheses" value="{{x}}" ng-selected="expression.left_parentheses==x">{{x}}</option>
+												    <!-- <option value="(">(</option>
+												    <option value="((">((</option>
+												    <option value="(((">(((</option> -->
+										</select>
+										<!-- 关联条件 -->
+										<!-- <select ng-model="expression.joiner">
+													<option value=""></option>
+												    <option value="&&">与</option>
+												    <option value="||">或</option>
+										</select> -->
+										<!-- 字段名 -->
+										<select ng-model="expression.parameters">
+												    <!-- <option value="num">档案编号</option> -->
+												    <option value="">请选择</option>
+												    <option value="{{op.value}}" ng-repeat="op in ops" ng-selected="expression.parameters==op.value">{{op.text}}</option>
+										</select>
+										<!-- 判断条件 -->
+										<select ng-model="expression.condition">
+													<option value=""></option>
+												    <option value="&gt;">大于</option>
+												    <option value="&gt;=">大于等于</option>
+												    <option value="&lt;">小于</option>
+												    <option value="&lt;=">小于等于</option>
+												    <option value="==">等于</option>
+												    <option value="!=">不等于</option>
+												    <option value=".contains">包含</option>
+                            <!--    写死的值，不要更改
+                               properties-condition-expression-hidden-controller.js 270 用到-->
+												    <option value="!contains">不包含</option>
+										</select>
+										<!-- 值 -->
+										<input type="text" ng-model="expression.para_value" placeholder="请输入参数值">
+										<!-- 判断顺序 -->
+										<!-- <select ng-model="expression.order">
+													<option ng-value=""></option>
+												    <option ng-value="1">1</option>
+												    <option ng-value="2">2</option>
+												    <option ng-value="3">3</option>
+												    <option ng-value="4">4</option>
+												    <option ng-value="5">5</option>
+												    <option ng-value="6">6</option>
+												    <option ng-value="7">7</option>
+												    <option ng-value="8">8</option>
+												    <option ng-value="9">9</option>
+												    <option ng-value="10">10</option>
+										</select> -->
+										<!-- 左括号 -->
+										<select ng-model="expression.right_parentheses" ng-init="rightLoad()">
+													<option value=""></option>
+													<option ng-repeat="x in right_parentheses" value="{{x}}" ng-selected="expression.right_parentheses==x">{{x}}</option>
+												    <!-- <option value=")">)</option>
+												    <option value="))">))</option>
+												    <option value=")))">)))</option> -->
+										</select>
+										<select ng-model="expression.joiner" >
+												    <option value="&&" >与</option>
+												    <option value="||">或</option>
+										</select>
+		            		            <i class="glyphicon glyphicon-plus clickable-property" ng-click="addExpressionValue($index)"></i>
+		            		            <i class="glyphicon glyphicon-minus clickable-property" ng-click="removeExpressionValue($index)"></i>
+		            	            </div>
+		            	       	</div>
+		                     </div>
+		                </div>
+
+		                <div class="row row-no-gutter">
+			                <div>
+			                	<div>
+			                		<label>是否需要满足会签条件：</label>
+			                		<!-- <div ng-model="activityId">{{activityId}}</div> -->
+				                	<input type="radio" name="isVote" ng-model="conditionExpression[0].isVote" value="1" ng-checked="checked(conditionExpression[0].activityId)" >是
+		        					<input type="radio" name="isVote" ng-model="conditionExpression[0].isVote" value="0" ng-checked="!checked(conditionExpression[0].activityId)">否
+		        					<!-- <select id="voteJoiner" ng-model="conditionExpression[0].voteJoiner"  ng-if="conditionExpression[0].isVote">
+		        							<option value=""></option>
+										    <option value="&&">与</option>
+										    <option value="||">或</option>
+										    <option value="!">非</option>
+									</select>
+		        					<input type="text" id="activityId" name="activityId" ng-model="conditionExpression[0].activityId" placeholder="请输入流程节点的id" ng-if="conditionExpression[0].isVote"> -->
+		        				</div>
+		        				<div>
+		        				    <label><font color="red">注：字段值为字符的，则要加上英文单引号，如：'sh01'</font></label>
+		        				    <label><font color="red">注：使用包含条件时，只支持一个字符，如：'sh01'</font></label>
+		        				</div>
+			                </div>
+		                </div>
+
+		                <div class="row row-no-gutter" ng-if="conditionExpression[0].isVote">
+		                		<select id="voteJoiner" ng-model="conditionExpression[0].voteJoiner">
+									    <option value="&&"  selected="selected">与</option>
+									    <option value="||">或</option>
+								</select>
+		                		<!-- <div ng-model="activityId">{{activityId}}</div> -->
+		                		<!-- <div ng-show="conditionExpression[0].isVote" class="voteStyle"> -->
+				                	<input type="radio" name="isAgree" ng-model="conditionExpression[0].isAgree" value="1">通过
+		        					<input type="radio" name="isAgree" ng-model="conditionExpression[0].isAgree" value="0">不通过
+	        					<!-- </div> -->
+	        					<input type="text" id="activityId" name="activityId" ng-model="conditionExpression[0].activityId" placeholder="请输入流程节点的id2" ng-if="conditionExpression[0].isVote">
+		                </div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="reset()" class="btn btn-primary" translate>ACTION.RESET</button>
+				<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+				<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+			</div>
+		</div>
+	</div>
+</div>

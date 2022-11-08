@@ -1,0 +1,41 @@
+<div class="modal" ng-controller="KisBpmoperationDialogPopupCtrl">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+			    <h3>操作配置</h3>
+			</div>
+			<div class="modal-body">
+				<form>
+					<input type="hidden" ng-model="operation.dialogcontent0">
+				<div class="checkboxBorder" id="releaseTaskBox" style="display:none;">
+					<label><input id="chk1" name="chk" value="releaseTask" type="checkbox" ng-model="operation.releaseTask" > 释放任务(releaseTask)</label>
+			    </div>
+			    <div class="checkboxBorder"  id="rollbackBox"  style="display:none;">
+			    	<label><input id="chk2" name="chk" value="rollbackPrevious" type="checkbox"  ng-model="operation.rollbackPrevious"> 回退（上一步）(rollbackPrevious)</label>
+					<label><input id="chk3" name="chk" value="jump" type="checkbox" ng-model="operation.jump"> 自由跳转(jump)</label><br>
+					<label><input id="chk4" name="chk" value="rollbackActivity" type="checkbox" ng-model="operation.rollbackActivity"> 回退（指定步骤）(rollbackActivity) <input ng-if="operation.rollbackActivity == true" type="text" placeholder="请输入流程节点的id，并以冒号分隔" id="rollbackactivityValue" ng-model="operation.rollbackActivityValue" style="padding:0 12px;width:257px;"></label>
+
+			    </div>
+			    <div class="checkboxBorder" id="counterBox"  style="display:none;">
+			    	<label><input id="chk5" name="chk" value="addCounterSign" type="checkbox" ng-model="operation.addCounterSign"> 加签(addCounterSign)</label>
+					<label><input id="chk6" name="chk" value="minusCounterSign" type="checkbox" ng-model="operation.minusCounterSign"> 减签(minusCounterSign)</label>
+			    </div>
+			    <div class="checkboxBorder" id="completeTaskBox"  style="display:none;">
+					<label><input id="chk7" name="chk" value="completeTask" type="checkbox" ng-model="operation.completeTask"> 终止任务(completeTask)</label>
+			    </div>
+			    <div class="checkboxBorder" id="submitTaskBox">
+					<label><input id="chk8" name="chk" value="submitTask" type="radio" ng-model="operation.submitTask"  ng-checked="true"> 提交任务(submitTask)</label>
+					<label><input id="chk9" name="chk" value="submitTaskWithPerson" type="radio" ng-model="operation.submitTaskWithPerson"> 选择提交(所有用户)</label>
+                    <label><input id="chk10" name="chk" value="submitTaskWithPresetPerson" type="radio" ng-model="operation.submitTaskWithPresetPerson"> 选择提交(预设用户)</label>
+			    </div>
+			   
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" class="btn btn-primary" translate >ACTION.SAVE</button>
+			</div>
+		</div>
+	</div>
+</div>
+

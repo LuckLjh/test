@@ -1,0 +1,13 @@
+<!-- 只能输入数字 三位数 -->
+<div ng-controller="KisBpmStringIntPropertyCtrl">
+    <input type="text" ng-model="property.value"
+    	   class="form-control" 
+           auto-focus
+           ng-blur="inputBlurred()"
+           ng-keypress="enterPressed($event)"
+		   onkeyup="value=value.replace([\d]{1,2}|[100]|[0],'')"
+		   onpaste="value=value.replace([\d]{1,2}|[100]|[0],'')"
+		   maxlength="3"
+		   placeholder="请输入不大于100的正整数"
+           />
+</div>
